@@ -1,9 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "./index.css";
 
 function App() {
 	return (
-		<div>
+		<div className="container">
 			<Header />
 			<Menu />
 			<Footer />
@@ -15,24 +16,28 @@ function Pizza() {
 	return (
 		<div>
 			<img src="pizzas/spinaci.jpg" alt="Spinaci Pizza" />
-			<h2>Pizza Spinaci</h2>
+			<h3>Pizza Spinaci</h3>
 			<p>Tomato, mozarella, spinach, and ricotta cheese</p>
 		</div>
 	);
 }
 
 function Header() {
-	return <h1>Fast REACT Restaurant</h1>;
+	return (
+		<header className="header">
+			<h1>Fast REACT Restaurant Co.</h1>
+		</header>
+	);
 }
 
 function Menu() {
 	return (
-		<div>
+		<main className="menu">
 			<h2>Our Menu</h2>
 			<Pizza />
 			<Pizza />
 			<Pizza />
-		</div>
+		</main>
 	);
 }
 
@@ -43,11 +48,11 @@ function Footer() {
 	const isOpen = hour >= openHour && hour < closedHour;
 
 	isOpen
-		? alert("The restaurant is open!")
-		: alert("The restaurant is closed!");
+		? console.log("The restaurant is open!")
+		: console.log("The restaurant is closed!");
 
 	return (
-		<footer>
+		<footer className="footer">
 			{new Date().toLocaleDateString()} © 2025 Fast REACT Restaurant - JP
 			studies
 		</footer>
