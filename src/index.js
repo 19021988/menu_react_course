@@ -4,10 +4,9 @@ import ReactDOM from "react-dom/client";
 function App() {
 	return (
 		<div>
-			<h1>Hello, React!</h1>
-			<Pizza />
-			<Pizza />
-			<Pizza />
+			<Header />
+			<Menu />
+			<Footer />
 		</div>
 	);
 }
@@ -19,6 +18,39 @@ function Pizza() {
 			<h2>Pizza Spinaci</h2>
 			<p>Tomato, mozarella, spinach, and ricotta cheese</p>
 		</div>
+	);
+}
+
+function Header() {
+	return <h1>Fast REACT Restaurant</h1>;
+}
+
+function Menu() {
+	return (
+		<div>
+			<h2>Our Menu</h2>
+			<Pizza />
+			<Pizza />
+			<Pizza />
+		</div>
+	);
+}
+
+function Footer() {
+	const hour = new Date().getHours();
+	const openHour = 10;
+	const closedHour = 23;
+	const isOpen = hour >= openHour && hour < closedHour;
+
+	isOpen
+		? alert("The restaurant is open!")
+		: alert("The restaurant is closed!");
+
+	return (
+		<footer>
+			{new Date().toLocaleDateString()} © 2025 Fast REACT Restaurant - JP
+			studies
+		</footer>
 	);
 }
 
