@@ -14,14 +14,41 @@ function App() {
 
 function Pizza(props) {
 	console.log(props);
+	// Check if the pizza is sold out - Early return pattern
+	// if (props.pizzaObject.soldOut) {
+	// 	return (
+	// 		<li className="pizza sold-out">
+	// 			<img src={props.pizzaObject.photoName} alt={props.name} />
+	// 			<div className="pizza-info">
+	// 				<h3>{props.pizzaObject.name}</h3>
+	// 				<p>{props.pizzaObject.ingredients}</p>
+	// 				<span className="price">SOLD OUT</span>
+	// 			</div>
+	// 		</li>
+	// 	);
+	// }
+	// // If not sold out, render the pizza normally
+	// return (
+	// 	<li className="pizza">
+	// 		<img src={props.pizzaObject.photoName} alt={props.name} />
+	// 		<div className="pizza-info">
+	// 			<h3>{props.pizzaObject.name}</h3>
+	// 			<p>{props.pizzaObject.ingredients}</p>
+	// 			<span className="price">{props.pizzaObject.price}</span>
+	// 		</div>
+	// 	</li>
+	// );
 
+	// Using a ternary operator to conditionally render the pizza
 	return (
-		<li className="pizza">
+		<li className={`pizza ${props.pizzaObject.soldOut ? "sold-out" : ""}`}>
 			<img src={props.pizzaObject.photoName} alt={props.name} />
 			<div className="pizza-info">
 				<h3>{props.pizzaObject.name}</h3>
 				<p>{props.pizzaObject.ingredients}</p>
-				<span className="price">{props.pizzaObject.price}</span>
+				<span className="price">
+					{props.pizzaObject.soldOut ? "SOLD OUT" : props.pizzaObject.price}
+				</span>
 			</div>
 		</li>
 	);
@@ -68,15 +95,21 @@ function Footer() {
 
 	return (
 		<footer className="footer">
-			{isOpen && (
-				<div className="order">
-					<p>
-						{new Date().toLocaleDateString()} © 2025 Fast REACT Restaurant – JP
-						studies
-					</p>
+			<div className="order">
+				<p>
+					{new Date().toLocaleDateString()} © 2025 Fast REACT Restaurant – JP
+					studies
+				</p>
+
+				{isOpen ? (
 					<button className="btn">Order</button>
-				</div>
-			)}
+				) : (
+					<p>
+						We are open from {openHour}:00 to {closedHour}:00. Please come back
+						tomorrow!
+					</p>
+				)}
+			</div>
 		</footer>
 	);
 }
