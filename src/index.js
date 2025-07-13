@@ -12,8 +12,8 @@ function App() {
 	);
 }
 
-function Pizza(props) {
-	console.log(props);
+function Pizza({ pizzaObject }) {
+	console.log(pizzaObject);
 	// Check if the pizza is sold out - Early return pattern
 	// if (props.pizzaObject.soldOut) {
 	// 	return (
@@ -41,13 +41,13 @@ function Pizza(props) {
 
 	// Using a ternary operator to conditionally render the pizza
 	return (
-		<li className={`pizza ${props.pizzaObject.soldOut ? "sold-out" : ""}`}>
-			<img src={props.pizzaObject.photoName} alt={props.name} />
+		<li className={`pizza ${pizzaObject.soldOut ? "sold-out" : ""}`}>
+			<img src={pizzaObject.photoName} alt={pizzaObject.name} />
 			<div className="pizza-info">
-				<h3>{props.pizzaObject.name}</h3>
-				<p>{props.pizzaObject.ingredients}</p>
+				<h3>{pizzaObject.name}</h3>
+				<p>{pizzaObject.ingredients}</p>
 				<span className="price">
-					{props.pizzaObject.soldOut ? "SOLD OUT" : props.pizzaObject.price}
+					{pizzaObject.soldOut ? "SOLD OUT" : pizzaObject.price}
 				</span>
 			</div>
 		</li>
@@ -63,15 +63,29 @@ function Header() {
 }
 
 function Menu() {
+	const pizzas = pizzaData;
+
 	return (
 		<main className="menu">
 			<h2>Our Menu</h2>
 
-			<ul className="pizzas">
-				{pizzaData.map((pizza) => (
-					<Pizza pizzaObject={pizza} key={pizza.name} />
-				))}
-			</ul>
+			{pizzas ? (
+				// using a fragment to group multiple elements without adding extra nodes - REACT
+				<>
+					<p>
+						Authentic Italian cuisine. Six creative dishes tp choose from. All
+						from stone oven, all organic, all delicious
+					</p>
+
+					<ul className="pizzas">
+						{pizzaData.map((pizza) => (
+							<Pizza pizzaObject={pizza} key={pizza.name} />
+						))}
+					</ul>
+				</>
+			) : (
+				<p>We are still working on our menu. Please come back later!</p>
+			)}
 
 			{/* <Pizza
 				name="Pizza Spinaci"
