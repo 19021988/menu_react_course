@@ -16,14 +16,14 @@ function Pizza(props) {
 	console.log(props);
 
 	return (
-		<div className="pizza">
-			<img src={props.photoName} alt={props.name} />
+		<li className="pizza">
+			<img src={props.pizzaObject.photoName} alt={props.name} />
 			<div className="pizza-info">
-				<h3>{props.name}</h3>
-				<p>{props.ingredients}</p>
-				<span className="price">{props.price}</span>
+				<h3>{props.pizzaObject.name}</h3>
+				<p>{props.pizzaObject.ingredients}</p>
+				<span className="price">{props.pizzaObject.price}</span>
 			</div>
-		</div>
+		</li>
 	);
 }
 
@@ -39,18 +39,19 @@ function Menu() {
 	return (
 		<main className="menu">
 			<h2>Our Menu</h2>
-			<Pizza
+
+			<ul className="pizzas">
+				{pizzaData.map((pizza) => (
+					<Pizza pizzaObject={pizza} key={pizza.name} />
+				))}
+			</ul>
+
+			{/* <Pizza
 				name="Pizza Spinaci"
 				ingredients="Tomato, mozarella, spinach, and ricotta cheese"
 				photoName="pizzas/spinaci.jpg"
 				price="12 EUR"
-			/>
-			<Pizza
-				name="Pizza Margherita"
-				ingredients="Tomato and mozarella"
-				photoName="pizzas/margherita.jpg"
-				price="10 EUR"
-			/>
+			/>*/}
 		</main>
 	);
 }
@@ -61,14 +62,21 @@ function Footer() {
 	const closedHour = 23;
 	const isOpen = hour >= openHour && hour < closedHour;
 
-	isOpen
-		? console.log("The restaurant is open!")
-		: console.log("The restaurant is closed!");
+	// isOpen
+	// 	? console.log("The restaurant is open!")
+	// 	: console.log("The restaurant is closed!");
 
 	return (
 		<footer className="footer">
-			{new Date().toLocaleDateString()} © 2025 Fast REACT Restaurant - JP
-			studies
+			{isOpen && (
+				<div className="order">
+					<p>
+						{new Date().toLocaleDateString()} © 2025 Fast REACT Restaurant – JP
+						studies
+					</p>
+					<button className="btn">Order</button>
+				</div>
+			)}
 		</footer>
 	);
 }
